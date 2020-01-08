@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
   </head>
   <body>
     <script>
@@ -14,8 +15,10 @@
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var $tweet = $('<p></p>');
+          var date = tweet.created_at;
+          var twitTime = moment(date).fromNow();
+          $tweet.html(`<a href = "#">@${tweet.user}</a> : ${tweet.message} - ${twitTime}`).addClass(`${tweet.user}`);
           $tweet.appendTo($body);
           index -= 1;
         }
