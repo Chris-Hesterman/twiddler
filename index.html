@@ -7,24 +7,35 @@
   </head>
   <body>
     <script>
-
       $(document).ready(function(){
         var $body = $('body');
+
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<p></p>');
-          var date = tweet.created_at;
-          var twitTime = moment(date).fromNow();
-          $tweet.html(`<a href = "#">@${tweet.user}</a> : ${tweet.message} - ${twitTime}`).addClass(`${tweet.user}`);
-          $tweet.appendTo($body);
-          index -= 1;
+        getTweets();
+
+        setInterval(function() {
+          getTweets();
+          console.log(streams.home.length)
+        }, 10000);
+
+        function getTweets() {
+          var index = 0;
+          $('body').empty(); //clear items before updating date
+          while (index < streams.home.length){
+            var tweet = streams.home[index];
+            var $tweet = $('<p></p>');
+            var date = tweet.created_at.toISOString(); //this is a suitable format for moment
+            var twitTime = moment(date).fromNow(); //this gets us 'twitter time'
+
+            $tweet.html(`<span class=${tweet.user}>@${tweet.user}</span> : ${tweet.message} - ${twitTime}`).addClass(`${tweet.user}`);
+
+            $tweet.appendTo($body);
+
+            index += 1;
+          }
         }
-
       });
-
     </script>
   </body>
 </html>
