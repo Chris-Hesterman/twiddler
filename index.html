@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" typ="text/css" href="./style.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
   </head>
   <body>
+    <h1>
+      <strong>
+        <em>Twiddler</em>
+      </strong>
+    </h1>
+
+    <div class="feed"></div>
+
     <script>
       $(document).ready(function(){
-        var $body = $('body');
+        var $feed = $('.feed');
 
-        $body.html('');
+        $feed.html('');
 
         getTweets();
 
@@ -21,16 +30,17 @@
 
         function getTweets() {
           var index = 0;
-          $('body').empty(); //clear items before updating date
+          $('.feed').empty(); //clear items before updating date
           while (index < streams.home.length){
             var tweet = streams.home[index];
-            var $tweet = $('<p></p>');
+            var $tweet = $('<div class="tweet-block"></div>');
             var date = tweet.created_at.toISOString(); //this is a suitable format for moment
-            var twitTime = moment(date).fromNow(); //this gets us 'twitter time'
+            var $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter time'
 
-            $tweet.html(`<span class=${tweet.user}>@${tweet.user}</span> : ${tweet.message} - ${twitTime}`).addClass(`${tweet.user}`);
+            $tweet.html(`<a href="#" class=${tweet.user}>@${tweet.user}</a><p class="tweet"> : ${tweet.message}</p>`).addClass(`${tweet.user}`);
 
-            $tweet.appendTo($body);
+            $tweet.appendTo($feed);
+            $twitTime.appendTo($tweet);
 
             index += 1;
           }
