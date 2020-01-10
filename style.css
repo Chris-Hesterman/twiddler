@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(226, 218, 204);
+}
+
 h1 {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -10,7 +14,7 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
 
-  width: 50vw;
+  width: 800px;
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: 5vh auto;
@@ -36,16 +40,16 @@ h1 {
   color: #999
 }
 
-a {
+.btn-user {
   color: blue;
 
 }
 
-a:hover {
+.btn-user:hover {
   color: red;
 }
 
-a:active {
+.btn-user:active {
   color: darkblue;
 }
 

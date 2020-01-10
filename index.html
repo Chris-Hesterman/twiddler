@@ -18,32 +18,54 @@
     <script>
       $(document).ready(function(){
         var $feed = $('.feed');
+        let paused = false;
+        let userName = '';
 
         $feed.html('');
 
         getTweets();
+        setEventHandlers();
 
         setInterval(function() {
-          getTweets();
-          console.log(streams.home.length)
+          getTweets(userName);
+          setEventHandlers();
         }, 10000);
 
-        function getTweets() {
+        function getTweets(userName) {
           var index = 0;
+          var strCollection = paused ? streams.users[arguments[0]]: streams.home;
+          console.log(strCollection);
           $('.feed').empty(); //clear items before updating date
-          while (index < streams.home.length){
-            var tweet = streams.home[index];
+          while (index < strCollection.length){
+            var tweet = strCollection[index];
             var $tweet = $('<div class="tweet-block"></div>');
             var date = tweet.created_at.toISOString(); //this is a suitable format for moment
             var $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter time'
 
-            $tweet.html(`<a href="#" class=${tweet.user}>@${tweet.user}</a><p class="tweet"> : ${tweet.message}</p>`).addClass(`${tweet.user}`);
+            $tweet.html(`<button href="#" class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp  ${tweet.message}</p>`);
+
+
 
             $tweet.appendTo($feed);
+
             $twitTime.appendTo($tweet);
 
+
             index += 1;
+            $(`.${tweet.user}`).addClass('btn-user');
           }
+        }
+
+        function handleClick(e) {
+          $feed.html('')
+          paused = true;
+          userName = e.target.classList[0];
+          getTweets(userName);
+          console.log(e.target.classList[0]);
+        }
+
+        function setEventHandlers() {
+          $('.feed').on('click', handleClick);
         }
       });
     </script>
