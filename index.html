@@ -12,6 +12,10 @@
         <em>Twiddler</em>
       </strong>
     </h1>
+    <div>
+      <button class="btn-main">Post!</button>
+
+    </div>
 
     <div class="feed"></div>
 
@@ -32,27 +36,22 @@
         }, 10000);
 
         function getTweets(userName) {
-          var index = 0;
           var strCollection = paused ? streams.users[arguments[0]]: streams.home;
+          var index = strCollection.length - 1;
           console.log(strCollection);
           $('.feed').empty(); //clear items before updating date
-          while (index < strCollection.length){
+          while (index >= 0){
             var tweet = strCollection[index];
             var $tweet = $('<div class="tweet-block"></div>');
             var date = tweet.created_at.toISOString(); //this is a suitable format for moment
             var $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter time'
 
-            $tweet.html(`<button href="#" class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp  ${tweet.message}</p>`);
-
-
+            $tweet.html(`<button href="#" class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
 
             $tweet.appendTo($feed);
-
             $twitTime.appendTo($tweet);
-
-
-            index += 1;
             $(`.${tweet.user}`).addClass('btn-user');
+            index -= 1;
           }
         }
 
