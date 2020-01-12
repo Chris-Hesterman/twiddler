@@ -7,16 +7,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
   </head>
   <body>
-    <h1>
-      <strong>
-        <em>Twiddler</em>
-      </strong>
-    </h1>
-    <div>
-      <button class="btn-main">Post!</button>
-    </div>
+    <header>
+      <h1>
+        <strong>
+          <em>Twiddler</em>
+        </strong>
+      </h1>
+      <div class="control">
+        <button class="btn-main">&ltBack</button>
+        <form class="form user-info">
+          <input type="text" class="form user-name-input" placeholder="Name..." autofocus required>
+          <input type="text" class="form user-message-input" placeholder="Message..." required>
+          <button type="submit" class="form submit">POST</button>
+        </form>
+      </div>
+    </header>
 
-    <div class="feed"></div>
+
+    <main class="feed"></main>
 
     <script>
       $(document).ready(function(){
@@ -42,7 +50,7 @@
             const $tweet = $('<div class="tweet-block"></div>');
             const $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`);   //this gets us 'twitter time'
 
-            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
+            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p><span class="spacer"> <span>`);
             $tweet.appendTo($feed);
             $twitTime.appendTo($tweet);
             $(`.${tweet.user}`).addClass('btn-user');
@@ -56,6 +64,9 @@
         function handleUserClick(e) {
           userName = e.target.classList[0];
           getTweets(userName);
+          $('.form').css('visibility', 'hidden');
+          $('.control').css('justify-content', 'flex-start');
+          $('.btn-main').show();
           console.log(e.target.classList)
         }
 
@@ -63,6 +74,11 @@
           if (userName) {
             userName = '';
             getTweets(userName);
+            $('.form').css('visibility', 'visible');
+            $('.control').css('justify-content', 'center');
+            $('.btn-main').hide();
+          } else {
+
           }
           console.log('Main');
         }
