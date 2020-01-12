@@ -20,70 +20,51 @@
 
     <script>
       $(document).ready(function(){
-        var $feed = $('.feed');
-        let paused = false;
+        let $feed = $('.feed');
         let userName = '';
 
-        $feed.html('');
-
         getTweets(userName);
-        setEventHandlers();
+        $('.btn-main').on('click', handleMainClick);
 
         setInterval(function() {
-          if (!paused) {
             getTweets(userName);
-            setEventHandlers();
-          }
-
         }, 10000);
 
         function getTweets(userName) {
-          var strCollection = userName ? streams.users[userName]: streams.home;
-          var index = strCollection.length - 1;
+          const strCollection = userName ? streams.users[userName]: streams.home;
+          let index = strCollection.length - 1;
 
-          $('.feed').empty(); //clear items before updating date
+          $('.feed').empty(); //clear items before refreshing
+
           while (index >= 0){
-            var tweet = strCollection[index];
-            var $tweet = $('<div class="tweet-block"></div>');
-            var date = tweet.created_at.toISOString(); //this is a suitable format for moment
-            var $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter time'
+            let tweet = strCollection[index];
+            const date = tweet.created_at.toISOString();  //this is a suitable format for moment.js to work with
+            const $tweet = $('<div class="tweet-block"></div>');
+            const $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`);   //this gets us 'twitter time'
 
-            $tweet.html(`<button href="#" class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
-
+            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
             $tweet.appendTo($feed);
             $twitTime.appendTo($tweet);
             $(`.${tweet.user}`).addClass('btn-user');
             index -= 1;
           }
+          // Since users keep getting refreshed, using jQuery 'one()' to attach
+          // event listener, fire it only once then remove itself.
+          $('.btn-user').one('click', handleUserClick);
         }
 
-        function handleClick(e) {
-          if (e.target.classList[0] === 'btn-main') {
-            if (!userName) {
-              handlePost();
-            } else {
-              userName = '';
-              getTweets(userName);
-              $('.btn-main').text('Post!');
-            }
-          } else {
-            userName = e.target.classList[0];
+        function handleUserClick(e) {
+          userName = e.target.classList[0];
+          getTweets(userName);
+          console.log(e.target.classList)
+        }
+
+        function handleMainClick(e) {
+          if (userName) {
+            userName = '';
             getTweets(userName);
-            $('.btn-main').text('< Back');
           }
-
-
-        }
-
-        function handlePost() {
-          $('.feed').empty();
-          paused = true;
-          $('.btn-main').text('Submit');
-
-        }
-
-        function setEventHandlers() {
-          $('.feed, .btn-main').on('click', handleClick);
+          console.log('Main');
         }
       });
     </script>
