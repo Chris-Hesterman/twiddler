@@ -1,3 +1,5 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
+
 body {
   margin: 0;
   background-color: #222;
@@ -5,7 +7,7 @@ body {
 }
 
 h1 {
-  margin: 0;
+  margin: 20px 0 0 0;
   text-align: center;
   font-size: 5rem;
   color: #333;
@@ -14,9 +16,16 @@ h1 {
 
 .feed {
   color: lime;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   background-color: #222;
   width: 70vw;
   border: 2px solid limegreen;
@@ -30,6 +39,7 @@ h1 {
 .feed::-webkit-scrollbar{
   background-color: black;
   border-radius: 15px;
+  width: 10px;
 }
 .feed::-webkit-scrollbar-thumb {
   background: limegreen;
@@ -37,9 +47,14 @@ h1 {
 }
 
 .tweet-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 90%;
+  min-height: 60px;
   margin: 0 auto;
 }
 
@@ -61,16 +76,20 @@ h1 {
   font-size: 2rem;
   background: transparent;
   font-weight: bold;
-  border: 1px solid limegreen;
+  border: 2px solid limegreen;
   border-radius: 10px;
   margin-left: 15vw;
-  box-shadow: 3px 3px #006600;
+  -webkit-box-shadow: 3px 3px 2px #006600;
+          box-shadow: 3px 3px 2px #006600;
   outline: none;
 }
 
 .btn-main:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px #006600;
+  -webkit-transform: translate(2px, 2px);
+      -ms-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+  -webkit-box-shadow: 1px 1px #000;
+          box-shadow: 1px 1px #000;
 }
 
 .btn-user {
@@ -92,4 +111,6 @@ h1 {
 .btn-user:active {
   color: maroon;
 }
+
+
 

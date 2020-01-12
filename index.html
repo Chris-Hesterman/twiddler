@@ -14,7 +14,6 @@
     </h1>
     <div>
       <button class="btn-main">Post!</button>
-
     </div>
 
     <div class="feed"></div>
@@ -27,18 +26,21 @@
 
         $feed.html('');
 
-        getTweets();
+        getTweets(userName);
         setEventHandlers();
 
         setInterval(function() {
-          getTweets(userName);
-          setEventHandlers();
+          if (!paused) {
+            getTweets(userName);
+            setEventHandlers();
+          }
+
         }, 10000);
 
         function getTweets(userName) {
-          var strCollection = paused ? streams.users[arguments[0]]: streams.home;
+          var strCollection = userName ? streams.users[userName]: streams.home;
           var index = strCollection.length - 1;
-          console.log(strCollection);
+
           $('.feed').empty(); //clear items before updating date
           while (index >= 0){
             var tweet = strCollection[index];
@@ -56,15 +58,32 @@
         }
 
         function handleClick(e) {
-          $feed.html('')
+          if (e.target.classList[0] === 'btn-main') {
+            if (!userName) {
+              handlePost();
+            } else {
+              userName = '';
+              getTweets(userName);
+              $('.btn-main').text('Post!');
+            }
+          } else {
+            userName = e.target.classList[0];
+            getTweets(userName);
+            $('.btn-main').text('< Back');
+          }
+
+
+        }
+
+        function handlePost() {
+          $('.feed').empty();
           paused = true;
-          userName = e.target.classList[0];
-          getTweets(userName);
-          console.log(e.target.classList[0]);
+          $('.btn-main').text('Submit');
+
         }
 
         function setEventHandlers() {
-          $('.feed').on('click', handleClick);
+          $('.feed, .btn-main').on('click', handleClick);
         }
       });
     </script>
