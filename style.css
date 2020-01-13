@@ -1,6 +1,6 @@
 /* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
 
-body {
+/* body {
   margin: 0;
   background-color: #222;
   font-family: Arial, sans-serif;
@@ -185,7 +185,246 @@ h1 {
   border: none;
   outline: none;
   text-decoration: underline;
-  width: 8rem;
+  width: 10rem;
+  text-align: left;
+
+}
+
+.btn-user:hover {
+  color: lime;
+}
+
+.btn-user:active {
+  color: green;
+} */
+
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
+
+body {
+  margin: 0;
+  background-color: #222;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin: 20px 0 15px 0;
+  text-align: center;
+  font-size: 5rem;
+  color: #333;
+  text-shadow: 0px 0px 10px limegreen, 0px 0px 10px limegreen, 0px -0px 10px limegreen, 0px 0px 10px limegreen;
+}
+
+.control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.user-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 60%;
+}
+
+.user-name-input,
+.user-message-input {
+  font-size: 1.2rem;
+  color: lime;
+  font-weight: 300;
+  background: #333;
+  caret-color: lime;
+  border: 2px solid limegreen;
+  border-radius: 10px;
+  margin-right: 10px;
+  outline: none;
+  padding: 3px;
+}
+
+.user-name-input::-webkit-input-placeholder, .user-message-input::-webkit-input-placeholder {
+  color: limegreen;
+  opacity: .5;
+}
+
+.user-name-input::-moz-placeholder, .user-message-input::-moz-placeholder {
+  color: limegreen;
+  opacity: .5;
+}
+
+.user-name-input:-ms-input-placeholder, .user-message-input:-ms-input-placeholder {
+  color: limegreen;
+  opacity: .5;
+}
+
+.user-name-input::-ms-input-placeholder, .user-message-input::-ms-input-placeholder {
+  color: limegreen;
+  opacity: .5;
+}
+
+.user-name-input::placeholder,
+.user-message-input::placeholder {
+  color: limegreen;
+  opacity: .5;
+}
+
+.user-name-input {
+  width: 10rem;
+}
+
+.user-message-input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.submit {
+  background: limegreen;
+  -webkit-box-shadow: 3px 3px 2px #006600;
+          box-shadow: 3px 3px 2px #006600;
+  color: #222;
+  font-size: 1.2rem;
+  font-weight: bold;
+  outline: none;
+  border:none;
+  border-radius: 10px;
+  width: 5rem;
+}
+
+.submit:hover,
+.btn-main:hover {
+  background: lime;
+}
+
+.feed {
+  color: lime;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: #222;
+  width: 70vw;
+  border: 2px solid limegreen;
+  border-radius: 10px;
+  padding-top: 20px;
+  margin: 5vh auto;
+  height: 60vh;
+  overflow-y: auto;
+  scrollbar-color: limegreen black;
+  scrollbar-width: medium;
+}
+
+.feed::-webkit-scrollbar{
+  background-color: black;
+  border-radius: 15px;
+  width: 10px;
+}
+
+.feed::-webkit-scrollbar-thumb {
+  background: limegreen;
+  border-radius: 50px;
+}
+
+.tweet-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 95%;
+  min-height: 60px;
+  margin: 0 auto;
+}
+
+.tweet-block:nth-of-type(odd) {
+  background-color: #333;
+  border-radius: 50px;
+}
+
+.tweet {
+  font-size: 1.1rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.date-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.tweet-time,
+.tweet-stamp {
+  color: #999;
+  text-align: center;
+  font-style: italic;
+  width: 12rem;
+}
+
+.tweet-time {
+  font-size: 1rem;
+  opacity: .5;
+  margin-bottom: 5px;
+}
+
+.tweet-stamp {
+  font-size: .7rem;
+  margin-top: 0;
+  color: lime;
+  opacity: .5;
+}
+
+.btn-back {
+  color: #222;
+  display: none;
+  font-size: 1.2rem;
+  background: limegreen;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  margin-left: 15vw;
+  -webkit-box-shadow: 3px 3px 2px #006600;
+          box-shadow: 3px 3px 2px #006600;
+  outline: none;
+}
+
+.btn-back:active,
+.submit:active {
+  -webkit-transform: translate(2px, 2px);
+      -ms-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+  -webkit-box-shadow: 1px 1px #000;
+          box-shadow: 1px 1px #000;
+}
+
+.btn-user {
+  color: limegreen;
+  background: transparent;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  width: 10rem;
   text-align: left;
 
 }
