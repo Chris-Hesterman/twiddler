@@ -14,15 +14,14 @@
         </strong>
       </h1>
       <div class="control">
-        <button class="btn-main">&ltBack</button>
+        <button class="btn-back">&ltBack</button>
         <form class="form user-info">
-          <input type="text" class="form user-name-input" placeholder="Name..." autofocus required>
+          <input type="text" class="form user-name-input" placeholder="Name..." name="name" autofocus required>
           <input type="text" class="form user-message-input" placeholder="Message..." required>
           <button type="submit" class="form submit">POST</button>
         </form>
       </div>
     </header>
-
 
     <main class="feed"></main>
 
@@ -31,13 +30,17 @@
         let $feed = $('.feed');
         let userName = '';
 
+        //Fetch initial messages to display, set necessary event listeners
         getTweets(userName);
-        $('.btn-main').on('click', handleMainClick);
+        $('.btn-back').on('click', handleBackClick);
+        $('form').on('submit', handleSubmit);
 
+        // Add new messages, newest first, to display at every interval
         setInterval(function() {
             getTweets(userName);
         }, 10000);
 
+        //gather date, info for each message, inject them into the DOM, newest first
         function getTweets(userName) {
           const strCollection = userName ? streams.users[userName]: streams.home;
           let index = strCollection.length - 1;
@@ -48,11 +51,14 @@
             let tweet = strCollection[index];
             const date = tweet.created_at.toISOString();  //this is a suitable format for moment.js to work with
             const $tweet = $('<div class="tweet-block"></div>');
-            const $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`);   //this gets us 'twitter time'
-
-            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p><span class="spacer"> <span>`);
+            let dateBlock = $('<div class="date-block"></div>');
+            const $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter style time'
+            const $twitStamp = $(`<p class="tweet-stamp">${moment(date).format('lll')}</p>`);   //standard date/time
+            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
+            $twitTime.appendTo(dateBlock);
+            $twitStamp.appendTo(dateBlock);
+            dateBlock.appendTo($tweet);
             $tweet.appendTo($feed);
-            $twitTime.appendTo($tweet);
             $(`.${tweet.user}`).addClass('btn-user');
             index -= 1;
           }
@@ -66,21 +72,36 @@
           getTweets(userName);
           $('.form').css('visibility', 'hidden');
           $('.control').css('justify-content', 'flex-start');
-          $('.btn-main').show();
-          console.log(e.target.classList)
+          $('.btn-back').show();
         }
 
-        function handleMainClick(e) {
-          if (userName) {
-            userName = '';
-            getTweets(userName);
-            $('.form').css('visibility', 'visible');
-            $('.control').css('justify-content', 'center');
-            $('.btn-main').hide();
-          } else {
+        function handleBackClick(e) {
+          userName = '';
+          getTweets(userName);
+          $('.form').css('visibility', 'visible');
+          $('.control').css('justify-content', 'center');
+          $('.btn-back').hide();
+        }
 
+        function handleSubmit(e) {
+          e.preventDefault();
+          let newTweet = {}
+
+          newTweet.user = e.target.elements[0].value.toLowerCase();
+          newTweet.message = e.target.elements[1].value;
+          newTweet.created_at = new Date();
+
+          const user = newTweet.user;
+
+          if (!streams.users[user]) {
+            streams.users[user] = [];
+            streams.users[user].push(newTweet);
+          } else {
+            streams.users[user].push(newTweet);
           }
-          console.log('Main');
+          streams.home.push(newTweet);
+          $('.user-info')[0].reset();
+          getTweets(userName);
         }
       });
     </script>

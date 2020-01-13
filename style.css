@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-  margin: 20px 0;
+  margin: 20px 0 15px 0;
   text-align: center;
   font-size: 5rem;
   color: #333;
@@ -22,8 +22,8 @@ h1 {
 .user-info {
   display: flex;
   width: 60%;
-
 }
+
 .user-name-input,
 .user-message-input {
   font-size: 1.2rem;
@@ -33,20 +33,25 @@ h1 {
   caret-color: lime;
   border: 2px solid limegreen;
   border-radius: 10px;
+  margin-right: 10px;
   outline: none;
   padding: 3px;
 }
+
 .user-name-input::placeholder,
 .user-message-input::placeholder {
   color: limegreen;
   opacity: .5;
 }
+
 .user-name-input {
   width: 10rem;
 }
+
 .user-message-input {
   flex: 1;
 }
+
 .submit {
   background: limegreen;
   -webkit-box-shadow: 3px 3px 2px #006600;
@@ -85,7 +90,8 @@ h1 {
   margin: 5vh auto;
   height: 60vh;
   overflow-y: auto;
-
+  scrollbar-color: limegreen black;
+  scrollbar-width: medium;
 }
 
 .feed::-webkit-scrollbar{
@@ -93,6 +99,7 @@ h1 {
   border-radius: 15px;
   width: 10px;
 }
+
 .feed::-webkit-scrollbar-thumb {
   background: limegreen;
   border-radius: 50px;
@@ -105,7 +112,7 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 90%;
+  width: 95%;
   min-height: 60px;
   margin: 0 auto;
 }
@@ -113,20 +120,42 @@ h1 {
 .tweet-block:nth-of-type(odd) {
   background-color: #333;
   border-radius: 50px;
-
 }
-.spacer {
+
+.tweet {
+  font-size: 1.1rem;
   flex: 1;
 }
 
-.tweet-time {
-  color: #999;
-  font-style: italic;
-  width: 12rem;
-
+.date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-main {
+.tweet-time,
+.tweet-stamp {
+  color: #999;
+  text-align: center;
+  font-style: italic;
+  width: 12rem;
+}
+
+.tweet-time {
+  font-size: 1rem;
+  opacity: .5;
+  margin-bottom: 5px;
+}
+
+.tweet-stamp {
+  font-size: .7rem;
+  margin-top: 0;
+  color: lime;
+  opacity: .5;
+}
+
+.btn-back {
   color: #222;
   display: none;
   font-size: 1.2rem;
@@ -140,7 +169,7 @@ h1 {
   outline: none;
 }
 
-.btn-main:active,
+.btn-back:active,
 .submit:active {
   -webkit-transform: translate(2px, 2px);
       -ms-transform: translate(2px, 2px);
@@ -156,7 +185,7 @@ h1 {
   border: none;
   outline: none;
   text-decoration: underline;
-  width: 10rem;
+  width: 8rem;
   text-align: left;
 
 }
@@ -166,7 +195,7 @@ h1 {
 }
 
 .btn-user:active {
-  color: maroon;
+  color: green;
 }
 
 
