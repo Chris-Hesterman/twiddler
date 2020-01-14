@@ -1,10 +1,15 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
 
-/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
 
+html {
+  height: 100vh;
+  width: 100vw;
+}
 body {
   margin: 0;
+  height: 100vh;
   background-color: #222;
-  font-family: Arial, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 h1 {
@@ -83,13 +88,13 @@ h1 {
 
 .submit {
   background: limegreen;
-  -webkit-box-shadow: 3px 3px 2px #006600;
-          box-shadow: 3px 3px 2px #006600;
+  -webkit-box-shadow: 2px 2px 3px #006600;
+          box-shadow: 2px 2px 3px #006600;
   color: #222;
   font-size: 1.2rem;
   font-weight: bold;
   outline: none;
-  border:none;
+  border: 1px solid black;
   border-radius: 10px;
   width: 5rem;
 }
@@ -142,7 +147,7 @@ h1 {
       -ms-flex-align: center;
           align-items: center;
   width: 95%;
-  min-height: 60px;
+  height: 60px;
   margin: 0 auto;
 }
 
@@ -153,6 +158,7 @@ h1 {
 
 .tweet {
   font-size: 1.1rem;
+  font-weight: 300;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -201,11 +207,11 @@ h1 {
   font-size: 1.2rem;
   background: limegreen;
   font-weight: bold;
-  border: none;
+  border: 1px solid black;
   border-radius: 10px;
   margin-left: 15vw;
-  -webkit-box-shadow: 3px 3px 2px #006600;
-          box-shadow: 3px 3px 2px #006600;
+  -webkit-box-shadow: 2px 2px 3px #006600;
+          box-shadow: 2px 2px 3px #006600;
   outline: none;
 }
 
@@ -236,6 +242,93 @@ h1 {
 
 .btn-user:active {
   color: green;
+}
+
+@media (max-width: 767px) {
+  body {
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .control {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .user-info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 90vw;
+  }
+
+  .btn-back {
+    margin-left: 5vw;
+    font-size: 1.2rem;
+    width: 5rem;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+
+  .feed {
+    width: 90vw;
+    height: 50vh;
+    margin-bottom: 5px;
+  }
+  .tweet-block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 100%;
+    padding-top: 10px;
+  }
+
+  .tweet-block:nth-of-type(odd) {
+    border-radius: 10px;
+  }
+
+  .btn-user {
+    text-align: center;
+    font-size: .9rem;
+    background: rgb(0, 66, 0);
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+
+  .tweet {
+    margin: 10px 0;
+    -webkit-box-flex: 0;
+        -ms-flex: 0;
+            flex: 0;
+    font-size: .9rem;
+  }
+
+  .tweet-time {
+    margin-top: 0;
+    font-size: .8rem;
+  }
 }
 
 
