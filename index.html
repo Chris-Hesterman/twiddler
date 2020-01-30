@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" typ="text/css" href="./style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" typ="text/css" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
@@ -18,8 +21,20 @@
       <div class="control">
         <button class="btn-back">&ltBACK</button>
         <form class="form user-info">
-          <input type="text" class="form user-name-input" placeholder="Name..." name="name" autofocus required>
-          <input type="text" class="form user-message-input" placeholder="Message..." required>
+          <input
+            type="text"
+            class="form user-name-input"
+            placeholder="Name..."
+            name="name"
+            autofocus
+            required
+          />
+          <input
+            type="text"
+            class="form user-message-input"
+            placeholder="Message..."
+            required
+          />
           <button type="submit" class="form submit">POST</button>
         </form>
       </div>
@@ -28,35 +43,41 @@
     <main class="feed"></main>
 
     <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         let $feed = $('.feed');
         let userName = '';
 
-        //Fetch initial messages to display, set necessary event listeners
         getTweets(userName);
         $('.btn-back').on('click', handleBackClick);
         $('form').on('submit', handleSubmit);
 
-        // Add new messages, newest first, to display at every interval
         setInterval(function() {
-            getTweets(userName);
+          getTweets(userName);
         }, 10000);
 
         //gather date, info for each message, inject them into the DOM, newest first
         function getTweets(userName) {
-          const strCollection = userName ? streams.users[userName]: streams.home;
+          const strCollection = userName
+            ? streams.users[userName]
+            : streams.home;
           let index = strCollection.length - 1;
 
           $('.feed').empty(); //clear items before refreshing
 
-          while (index >= 0){
+          while (index >= 0) {
             let tweet = strCollection[index];
-            const date = tweet.created_at.toISOString();  //this is a suitable format for moment.js to work with
+            const date = tweet.created_at.toISOString(); //this is a suitable format for moment.js to work with
             const $tweet = $('<div class="tweet-block"></div>');
             let dateBlock = $('<div class="date-block"></div>');
-            const $twitTime = $(`<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`); //this gets us 'twitter style time'
-            const $twitStamp = $(`<p class="tweet-stamp">${moment(date).format('lll')}</p>`);   //standard date/time
-            $tweet.html(`<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`);
+            const $twitTime = $(
+              `<p class="tweet-time">&nbsp  - ${moment(date).fromNow()}</p>`
+            ); //this gets us 'twitter style time'
+            const $twitStamp = $(
+              `<p class="tweet-stamp">${moment(date).format('lll')}</p>`
+            );
+            $tweet.html(
+              `<button class=${tweet.user}>@${tweet.user}</button><p class="tweet">&nbsp-- ${tweet.message}</p>`
+            );
             $twitTime.appendTo(dateBlock);
             $twitStamp.appendTo(dateBlock);
             dateBlock.appendTo($tweet);
@@ -87,7 +108,7 @@
 
         function handleSubmit(e) {
           e.preventDefault();
-          let newTweet = {}
+          let newTweet = {};
 
           newTweet.user = e.target.elements[0].value.toLowerCase();
           newTweet.message = e.target.elements[1].value;
